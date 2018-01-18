@@ -16,7 +16,7 @@ import { Task } from './task.model';
       <option [value]="2"> Medium Priority </option>
       <option [value]="3"> High Priority </option>
     </select>
-    <button (click)="submitForm(newDescription.value, newPriority.value)">Add</button>
+    <button (click)="submitForm(newDescription.value, newPriority.value); newDescription.value='';">Add</button>
     </div>
   `
 })
@@ -25,7 +25,7 @@ export class NewTaskComponent {
   @Output() newTaskSender = new EventEmitter();
 
   submitForm(description: string, priority: number) {
-    //EventEmitters can only send one argument at a time. If we have multiple pieces of information that we need to send up, we must bundle them in an object or an array. Because our goal is to create a new Task object anyway, it makes sense to construct it here before sending it upwards. 
+    //EventEmitters can only send one argument at a time. If we have multiple pieces of information that we need to send up, we must bundle them in an object or an array. Because our goal is to create a new Task object anyway, it makes sense to construct it here before sending it upwards.
     var newTaskToAdd: Task = new Task(description, priority);
     this.newTaskSender.emit(newTaskToAdd);
   }
